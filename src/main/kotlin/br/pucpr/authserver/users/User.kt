@@ -1,6 +1,7 @@
 package br.pucpr.authserver.users
 
 import br.pucpr.authserver.roles.Role
+import br.pucpr.authserver.task.Task
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 
@@ -26,5 +27,8 @@ class User(
         joinColumns = [JoinColumn(name="idUser")],
         inverseJoinColumns = [JoinColumn(name="idRole")]
     )
-    val roles: MutableSet<Role> = mutableSetOf()
+    val roles: MutableSet<Role> = mutableSetOf(),
+
+    @OneToMany(mappedBy = "user")
+    val tasks: MutableSet<Task> = mutableSetOf()
 )
